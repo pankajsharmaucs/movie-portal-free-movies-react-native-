@@ -7,9 +7,6 @@ const VideoPlayerScreen = ({ route }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // console.log(videoUrl);
-  
-
   useEffect(() => {
     // Cleanup function to reset state when the component is unmounted
     return () => {
@@ -32,7 +29,9 @@ const VideoPlayerScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
-      {loading && <ActivityIndicator size="large" color="#fff" />}
+      {loading && (
+        <ActivityIndicator size="large" color="#fff" style={styles.loader} />
+      )}
       {error ? (
         <Text style={styles.errorText}>Failed to load video. Please try again later.</Text>
       ) : (
@@ -66,6 +65,13 @@ const styles = StyleSheet.create({
   videoPlayer: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height / 2, // Adjust the height as needed
+  },
+  loader: {
+    position: 'absolute', // Position loader on top of the video
+    top: '50%',
+    left: '50%',
+    marginLeft: -25,
+    marginTop: -25,
   },
   errorText: {
     color: '#ff0000',
